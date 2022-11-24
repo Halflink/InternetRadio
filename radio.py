@@ -16,6 +16,7 @@ class Radio:
         self.volume = 30
         self.current_url = ""
         self.stop_thread_event = self.threading.Event()
+        self.new_url_event = self.threading.Event()
 
         # creating a vlc instance
         self.vlc_instance = self.vlc.Instance()
@@ -35,14 +36,8 @@ class Radio:
     def play_media(self, url):
         # play the audio
         self.current_url = url
-
-        # in case thread is running, player first needs to stop.
-        if self.player_thread.is_alive():
-            self.end_player_thread()
-
         self.set_media(self.current_url)
         self.player.play()
-        self.start_player_thread()
 
     def volume_up(self):
         if self.volume < 100:
@@ -54,14 +49,18 @@ class Radio:
             self.volume = self.volume + 1
             self.player.audio_set_volume(self.volume)
 
-    def player_thread_function(self, thread_name, stop_thread_event, ):
+    def player_thread_function(self, thread_name, stop_thread_event, new_url_event, ):
         try:
-            #create reset player event that resets player.
+            # create reset player event that resets player.
             self.player.play()
             while True:
                 self.time.sleep(0.5)
                 if stop_thread_event.is_set():
                     break
+                if new_url_event.is_set():
+                    self.player.stop()
+                    self.play_media(self.current_url)
+                    self.new_url_event.clear()
         except KeyboardInterrupt as e:
             print("Quit")
         except Exception as e:
@@ -76,12 +75,15 @@ class Radio:
         self.player_thread.join()
 
     def start_player_thread(self):
-        self.player_thread.start()
+        if self.current_url != "":
+            radio.play_media(self.current_url)
+            self.player_thread.start()
 
 
 if __name__ == '__main__':
     radio = Radio()
-    radio.play_media('http://playerservices.streamtheworld.com/api/livestream-redirect/KINK.mp3')
+    radio.current_url = 'http://playerservices.streamtheworld.com/api/livestream-redirect/KINK.mp3'
+    radio.start_player_thread()
 
     while True:
         print('playing {0} on volume = {1} '.format(radio.current_url, str(radio.volume)))
