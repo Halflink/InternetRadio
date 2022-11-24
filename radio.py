@@ -24,7 +24,8 @@ class Radio:
         self.player.audio_set_volume(self.volume)
 
         self.player_thread = self.threading.Thread(target=self.player_thread_function, args=("player thread",
-                                                                                             self.stop_thread_event))
+                                                                                             self.stop_thread_event,
+                                                                                             self.new_url_event))
 
     def set_media(self, source):
         # creating a media
