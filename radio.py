@@ -58,7 +58,7 @@ class Radio:
         try:
             self.player.play()
             while True:
-                pass
+                self.time.sleep(1)
         except KeyboardInterrupt as e:
             print("Quit")
         except Exception as e:
