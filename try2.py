@@ -1,16 +1,33 @@
-url = 'http://prem1.rockradio.com:80/bluesrock?9555ae7caa92404c73cade1d'
+# importing time and vlc
+import time, vlc
 
-#define VLC instance
-instance = vlc.Instance('--input-repeat=-1', '--fullscreen')
 
-#Define VLC player
-player=instance.media_player_new()
+# method to play video
+def radio(source):
+    # creating a vlc instance
+    vlc_instance = vlc.Instance()
 
-#Define VLC media
-media=instance.media_new(url)
+    # creating a media player
+    player = vlc_instance.media_player_new()
 
-#Set player media
-player.set_media(media)
+    # creating a media
+    media = vlc_instance.media_new(source)
 
-#Play the media
-player.play()
+    # setting media to the player
+    player.set_media(media)
+
+    # play the video
+    player.play()
+
+    # wait time
+    time.sleep(10)
+
+    # getting the duration of the video
+    duration = player.get_length()
+
+    # printing the duration of the video
+    print("Duration : " + str(duration))
+
+
+# call the video method
+radio("http://playerservices.streamtheworld.com/api/livestream-redirect/KINK.mp3")
