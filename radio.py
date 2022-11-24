@@ -37,8 +37,9 @@ class Radio:
 
     def player_thread_function(self, thread_name, stop_thread_event, ):
         try:
+            self.play_media()
             while True:
-                self.play_media()
+                pass
         except KeyboardInterrupt as e:
             print("Quit")
         except Exception as e:
