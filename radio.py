@@ -81,7 +81,7 @@ if __name__ == '__main__':
     radio.play_media('http://playerservices.streamtheworld.com/api/livestream-redirect/KINK.mp3')
 
     while True:
-        print('playing {} on volume = {} ', format(radio.current_url, str(radio.volume)))
+        print('playing {0} on volume = {1} ', format(radio.current_url, str(radio.volume)))
         radio.time.sleep(100)
         radio.play_media('https://playerservices.streamtheworld.com/api/livestream-redirect/KINK_DNA.mp3')
 
