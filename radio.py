@@ -6,7 +6,6 @@
 # tested with:
 # http://playerservices.streamtheworld.com/api/livestream-redirect/KINK.mp3
 class Radio:
-
     import time
     import vlc
     import threading
@@ -22,8 +21,8 @@ class Radio:
         self.vlc_instance = self.vlc.Instance()
         self.player = self.vlc_instance.media_player_new()
 
-        self.play_thread = self.threading.Thread(target=self.player_thread_function, args=("player thread",
-                                                                                           self.stop_thread_event))
+        self.player_thread = self.threading.Thread(target=self.player_thread_function, args=("player thread",
+                                                                                             self.stop_thread_event))
 
     def set_media(self, source):
         # creating a media
@@ -44,9 +43,9 @@ class Radio:
             print("Quit")
         except Exception as e:
             print("Quit")
-            #self.powerLed.led_set("RED")
-            #self.log.exception("Error occurred in sensor thread")
-            #self.log.exception(e)
+            # self.powerLed.led_set("RED")
+            # self.log.exception("Error occurred in sensor thread")
+            # self.log.exception(e)
 
     def end_player_thread(self):
         self.stop_thread_event.set()
@@ -55,6 +54,7 @@ class Radio:
 
     def start_player_thread(self):
         self.player_thread.start()
+
 
 if __name__ == '__main__':
     radio = Radio()
