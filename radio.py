@@ -20,6 +20,7 @@ class Radio:
         # creating a vlc instance
         self.vlc_instance = self.vlc.Instance()
         self.player = self.vlc_instance.media_player_new()
+        self.player.audio_set_volume(self.volume)
 
         self.player_thread = self.threading.Thread(target=self.player_thread_function, args=("player thread",
                                                                                              self.stop_thread_event))
@@ -34,6 +35,9 @@ class Radio:
     def play_media(self):
         # play the audio
         self.player.play()
+
+    def volume_up(self):
+        audio_set_volume(50)
 
     def player_thread_function(self, thread_name, stop_thread_event, ):
         try:
