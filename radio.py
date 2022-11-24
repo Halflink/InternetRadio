@@ -13,7 +13,7 @@ class Radio:
     def __init__(self):
 
         # initiate variables
-        self.volume = 20
+        self.volume = 30
         self.current_url = ""
         self.stop_thread_event = self.threading.Event()
 
@@ -32,9 +32,17 @@ class Radio:
         # setting media to the player
         self.player.set_media(media)
 
-    def play_media(self):
+    def play_media(self, url):
         # play the audio
+        self.current_url = url
+
+        # in case thread is running, player first needs to stop.
+        if self.player_thread.isAlive():
+            self.end_player_thread()
+
+        self.set_media(self.current_url)
         self.player.play()
+        self.start_player_thread()
 
     def volume_up(self):
         if self.volume < 100:
@@ -48,7 +56,7 @@ class Radio:
 
     def player_thread_function(self, thread_name, stop_thread_event, ):
         try:
-            self.play_media()
+            self.player.play()
             while True:
                 pass
         except KeyboardInterrupt as e:
@@ -70,12 +78,12 @@ class Radio:
 
 if __name__ == '__main__':
     radio = Radio()
-    radio.set_media('http://playerservices.streamtheworld.com/api/livestream-redirect/KINK.mp3')
-    radio.start_player_thread()
+    radio.play_media('http://playerservices.streamtheworld.com/api/livestream-redirect/KINK.mp3')
+
     while True:
-        print("volume = {}", format(radio.volume))
-        radio.time.sleep(1)
-        if radio.volume < 50:
-            radio.volume_up()
+        print('playing {} on volume = {} ', format(radio.current_url, radio.volume))
+        radio.time.sleep(100)
+        radio.play_media('https://playerservices.streamtheworld.com/api/livestream-redirect/KINK_DNA.mp3')
+
 
 
