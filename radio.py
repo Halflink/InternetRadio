@@ -56,6 +56,7 @@ class Radio:
 
     def player_thread_function(self, thread_name, stop_thread_event, ):
         try:
+            #create reset player event that resets player.
             self.player.play()
             while True:
                 self.time.sleep(0.5)
