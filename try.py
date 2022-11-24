@@ -1,19 +1,32 @@
+#importing vlc module
 import vlc
+# importing time module
 import time
 
-url = 'http://prem1.rockradio.com:80/bluesrock?9555ae7caa92404c73cade1d'
+# creating vlc media player object
+media_player = vlc.MediaPlayer()
 
-#define VLC instance
-instance = vlc.Instance('--input-repeat=-1', '--fullscreen')
+# media object
+media = vlc.Media("death_note.mkv")
 
-#Define VLC player
-player=instance.media_player_new()
+# setting media to the media player
+media_player.set_media(media)
 
-#Define VLC media
-media=instance.media_new(url)
+# setting video scale
+media_player.video_set_scale(0.6)
 
-#Set player media
-player.set_media(media)
+# start playing video
+media_player.play()
 
-#Play the media
-player.play()
+# wait so the video can be played for 5 seconds
+# irrespective for length of video
+time.sleep(5)
+
+# getting track
+value = media_player.audio_output_device_enum()
+
+# printing value
+print("Audio Output Devices: ")
+print(value)
+
+
