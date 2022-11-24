@@ -88,10 +88,11 @@ if __name__ == '__main__':
     radio = Radio()
     radio.play_media('http://playerservices.streamtheworld.com/api/livestream-redirect/KINK.mp3')
     radio.time.sleep(10)
-    value = radio.player.audio_get_track_description()
-    # printing subtitle description
-    print("Audio Tracks Description")
-    print(value)
+    while True:
+        value = radio.player.audio_get_track_description()
+        # printing subtitle description
+        print("Audio Tracks Description")
+        print(value)
 
 
 
