@@ -8,7 +8,7 @@
 class Radio:
 
     import time
-    import vnc
+    import vlc
 
     def __init__(self):
 
