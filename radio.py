@@ -80,7 +80,6 @@ class Radio:
 
     def start_player_thread(self):
         if self.current_url != "":
-            radio.play_media(self.current_url)
             self.player_thread.start()
 
 
