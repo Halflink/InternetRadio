@@ -36,7 +36,7 @@ class Radio:
         # play the audio
         self.player.play()
 
-    def play_thread_function(self, thread_name, stop_thread_event, ):
+    def player_thread_function(self, thread_name, stop_thread_event, ):
         try:
             while True:
                 self.play_media()
