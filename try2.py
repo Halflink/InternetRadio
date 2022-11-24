@@ -20,7 +20,7 @@ def radio(source):
     player.play()
 
     # wait time
-    time.sleep(10)
+    time.sleep(100)
 
     # getting the duration of the video
     duration = player.get_length()
@@ -30,4 +30,4 @@ def radio(source):
 
 
 # call the video method
-radio("http://playerservices.streamtheworld.com/api/livestream-redirect/KINKK.mp3")
+radio("http://playerservices.streamtheworld.com/api/livestream-redirect/KINK.mp3")
