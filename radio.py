@@ -37,7 +37,7 @@ class Radio:
         self.current_url = url
 
         # in case thread is running, player first needs to stop.
-        if self.player_thread.isAlive():
+        if self.player_thread.is_alive():
             self.end_player_thread()
 
         self.set_media(self.current_url)
