@@ -37,7 +37,14 @@ class Radio:
         self.player.play()
 
     def volume_up(self):
-        audio_set_volume(50)
+        if self.volume < 100:
+            self.volume = self.volume + 1
+            self.player.audio_set_volume(self.volume)
+
+    def volume_down(self):
+        if self.volume > 1:
+            self.volume = self.volume + 1
+            self.player.audio_set_volume(self.volume)
 
     def player_thread_function(self, thread_name, stop_thread_event, ):
         try:
@@ -66,5 +73,9 @@ if __name__ == '__main__':
     radio.set_media('http://playerservices.streamtheworld.com/api/livestream-redirect/KINK.mp3')
     radio.start_player_thread()
     while True:
-        print("playing")
-        radio.time.sleep(10)
+        print("volume = {}", format(radio.volume))
+        radio.time.sleep(1)
+        if radio.volume < 50:
+            radio.volume_up()
+
+
