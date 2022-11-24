@@ -29,15 +29,18 @@ class Radio:
     def set_media(self, source):
         # creating a media
         media = self.vlc_instance.media_new(source)
-
         # setting media to the player
         self.player.set_media(media)
 
     def play_media(self, url):
-        # play the audio
+        # set the audio
         self.current_url = url
         self.set_media(self.current_url)
-        self.player.play()
+
+        if self.player_thread.is_alive():
+            self.new_url_event.set()
+        else:
+            self.start_player_thread()
 
     def volume_up(self):
         if self.volume < 100:
@@ -59,7 +62,8 @@ class Radio:
                     break
                 if new_url_event.is_set():
                     self.player.stop()
-                    self.play_media(self.current_url)
+                    self.time.sleep(1)
+                    self.player.play()
                     self.new_url_event.clear()
         except KeyboardInterrupt as e:
             print("Quit")
@@ -82,9 +86,7 @@ class Radio:
 
 if __name__ == '__main__':
     radio = Radio()
-    radio.current_url = 'http://playerservices.streamtheworld.com/api/livestream-redirect/KINK.mp3'
-    radio.start_player_thread()
-
+    radio.play_media('http://playerservices.streamtheworld.com/api/livestream-redirect/KINK.mp3')
     while True:
         print('playing {0} on volume = {1} '.format(radio.current_url, str(radio.volume)))
         radio.time.sleep(30)
