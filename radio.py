@@ -17,7 +17,7 @@ class Radio:
         self.current_url = ""
 
         # creating a vlc instance
-        self.vlc_instance = vlc.Instance()
+        self.vlc_instance = self.vlc.Instance()
         self.player = self.vlc_instance.media_player_new()
 
     def set_media(self, source):
