@@ -61,3 +61,6 @@ if __name__ == '__main__':
     radio = Radio()
     radio.set_media('http://playerservices.streamtheworld.com/api/livestream-redirect/KINK.mp3')
     radio.start_player_thread()
+    while True:
+        print("playing")
+        radio.time.sleep(10)
