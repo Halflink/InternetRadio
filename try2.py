@@ -30,4 +30,4 @@ def radio(source):
 
 
 # call the video method
-radio("http://playerservices.streamtheworld.com/api/livestream-redirect/KIN.mp3")
+radio("http://playerservices.streamtheworld.com/api/livestream-redirect/KINKK.mp3")
