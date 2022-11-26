@@ -33,7 +33,7 @@ lcd_rs = digitalio.DigitalInOut(board.D25)
 lcd_en = digitalio.DigitalInOut(board.D24)
 lcd_d4 = digitalio.DigitalInOut(board.D23)
 lcd_d5 = digitalio.DigitalInOut(board.D17)
-lcd_d6 = digitalio.DigitalInOut(board.D18)
+lcd_d6 = digitalio.DigitalInOut(board.D15)
 lcd_d7 = digitalio.DigitalInOut(board.D22)
 lcd_backlight = digitalio.DigitalInOut(board.D9)
 
