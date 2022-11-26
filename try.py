@@ -1,32 +1,23 @@
-#importing vlc module
-import vlc
-# importing time module
-import time
+#!/usr/bin/python
 
-# creating vlc media player object
-media_player = vlc.MediaPlayer()
+import Adafruit_CharLCD as LCD
 
-# media object
-media = vlc.Media("death_note.mkv")
+# Raspberry Pi pin configuration:
+lcd_rs = 25
+lcd_en = 24
+lcd_d4 = 23
+lcd_d5 = 17
+lcd_d6 = 18
+lcd_d7 = 22
+lcd_backlight = 1
 
-# setting media to the media player
-media_player.set_media(media)
+# Define LCD column and row size for 16x2 LCD.
+lcd_columns = 16
+lcd_rows    = 2
 
-# setting video scale
-media_player.video_set_scale(0.6)
+# Initialize the LCD using the pins above.
+lcd = LCD.Adafruit_CharLCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7,
+                           lcd_columns, lcd_rows, lcd_backlight)
 
-# start playing video
-media_player.play()
-
-# wait so the video can be played for 5 seconds
-# irrespective for length of video
-time.sleep(5)
-
-# getting track
-value = media_player.audio_output_device_enum()
-
-# printing value
-print("Audio Output Devices: ")
-print(value)
-
-
+# Print a two line message
+lcd.message('Hello!\nraspberrytips.nl')

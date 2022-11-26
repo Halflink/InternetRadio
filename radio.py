@@ -95,6 +95,7 @@ if __name__ == '__main__':
         radio.time.sleep(2)
         value = radio.player.audio_get_track()
         print('description: {}'.format(value))
+        radio.vlc.au
 
 
 
