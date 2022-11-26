@@ -40,10 +40,24 @@ lcd_backlight = digitalio.DigitalInOut(board.D9)
 lcd_columns = 16
 lcd_rows = 2
 
-lcd = character_lcd.Character_LCD_Mono(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7, lcd_columns, lcd_rows, lcd_backlight)
+lcd = character_lcd.Character_LCD_Mono(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7, lcd_columns, lcd_rows,
+                                       lcd_backlight)
 
 
-print('prpbeer')
+print('probeer')
+lcd.backlight = True
 lcd.message = "Hello\nCircuitPython"
-time.sleep(10)
-lcd.clear()
+
+scroll_message = "Eens kijken hoe scrollen werkt"
+
+while True:
+    lcd.backlight = True
+    lcd.message = scroll_message
+    time.sleep(2)
+    for i in range(len(scroll_message)):
+        lcd.move_left()
+        time.sleep(0.5)
+    time.sleep(2)
+    lcd.clear()
+    lcd.backlight = False
+    time.sleep(2)
