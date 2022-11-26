@@ -3,6 +3,7 @@
 import board
 import digitalio
 import adafruit_character_lcd.character_lcd as character_lcd
+import time
 
 
 # import Adafruit_CharLCD as LCD
@@ -43,3 +44,5 @@ lcd = character_lcd.Character_LCD_Mono(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, l
 
 print('prpbeer')
 lcd.message = "Hello\nCircuitPython"
+time.sleep(10)
+lcd.clear()
