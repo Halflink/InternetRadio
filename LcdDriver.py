@@ -67,7 +67,7 @@ class LcdDriver:
             now = self.datetime.datetime.now()
 
             self.lcd_string("WHOOPIE goldberg", self.LCD_LINE_2)
-            self.lcd_string(str(now.hour) + ":" + str(now.minute), self.LCD_LINE_1)
+            self.lcd_string(str(now.hour) + ":" + str(now.minute) + " ola", self.LCD_LINE_1)
             self.time.sleep(1)
 
 
