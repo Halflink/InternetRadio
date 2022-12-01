@@ -6,26 +6,25 @@ class LcdDriver:
     import time
     import datetime
 
-    I2C_ADDR = 0x27  # I2C device address
-    LCD_WIDTH = 16  # Maximum characters per line
-
     # Define some device constants
-    LCD_CHR = 1  # Mode - Sending data
-    LCD_CMD = 0  # Mode - Sending command
-
     LCD_LINE_1 = 0x80  # LCD RAM address for the 1st line
     LCD_LINE_2 = 0xC0  # LCD RAM address for the 2nd line
 
-    LCD_BACKLIGHT = 0x08  # On 0X08 / Off 0x00
 
-    ENABLE = 0b00000100  # Enable bit
+    def __init__(self, lcd_address = 0x27, lcd_with = 16, lcd_lines):
+        self.I2C_ADDR = lcd_address # I2C device address
+        self.LCD_WIDTH = lcd_with  # Maximum characters per line
+        self.LCD_CHR = 1  # Mode - Sending data
+        self.LCD_CMD = 0  # Mode - Sending command
+        self.LCD_BACKLIGHT = 0x08  # On 0X08 / Off 0x00
+        self.ENABLE = 0b00000100  # Enable bit
+        self.E_PULSE = 0.0005
+        self.E_DELAY = 0.0005
+        self.bus = self.smbus.SMBus(1)  # Rev 2 Pi uses 1
 
-    E_PULSE = 0.0005
-    E_DELAY = 0.0005
+        #LCD_LINE_3 = 0x94  # LCD RAM address for the 3rd line
+        #LCD_LINE_4 = 0xD4  # LCD RAM address for the 4th line
 
-    bus = smbus.SMBus(1)  # Rev 2 Pi uses 1
-
-    def __init__(self):
         self.lcd_byte(0x33, self.LCD_CMD)  # 110011 Initialise
         self.lcd_byte(0x32, self.LCD_CMD)  # 110010 Initialise
         self.lcd_byte(0x06, self.LCD_CMD)  # 000110 Cursor move direction
