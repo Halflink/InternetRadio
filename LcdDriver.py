@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 class LcdDriver:
+
     import smbus
     import time
     import datetime
@@ -24,60 +25,58 @@ class LcdDriver:
 
     bus = smbus.SMBus(1)  # Rev 2 Pi uses 1
 
-    def lcd_init():
-        lcd_byte(0x33, LCD_CMD)  # 110011 Initialise
-        lcd_byte(0x32, LCD_CMD)  # 110010 Initialise
-        lcd_byte(0x06, LCD_CMD)  # 000110 Cursor move direction
-        lcd_byte(0x0C, LCD_CMD)  # 001100 Display On,Cursor Off, Blink Off
-        lcd_byte(0x28, LCD_CMD)  # 101000 Data length, number of lines, font size
-        lcd_byte(0x01, LCD_CMD)  # 000001 Clear display
-        time.sleep(E_DELAY)
+    def __init__(self):
+        self.lcd_byte(0x33, self.LCD_CMD)  # 110011 Initialise
+        self.lcd_byte(0x32, self.LCD_CMD)  # 110010 Initialise
+        self.lcd_byte(0x06, self.LCD_CMD)  # 000110 Cursor move direction
+        self.lcd_byte(0x0C, self.LCD_CMD)  # 001100 Display On,Cursor Off, Blink Off
+        self.lcd_byte(0x28, self.LCD_CMD)  # 101000 Data length, number of lines, font size
+        self.lcd_byte(0x01, self.LCD_CMD)  # 000001 Clear display
+        self.time.sleep(self.E_DELAY)
 
-    def lcd_byte(bits, mode):
+    def lcd_byte(self, bits, mode):
 
-        bits_high = mode | (bits & 0xF0) | LCD_BACKLIGHT
-        bits_low = mode | ((bits << 4) & 0xF0) | LCD_BACKLIGHT
+        bits_high = mode | (bits & 0xF0) | self.LCD_BACKLIGHT
+        bits_low = mode | ((bits << 4) & 0xF0) | self.LCD_BACKLIGHT
 
-        bus.write_byte(I2C_ADDR, bits_high)
-        lcd_toggle_enable(bits_high)
+        self.bus.write_byte(self.I2C_ADDR, bits_high)
+        self.lcd_toggle_enable(bits_high)
 
-        bus.write_byte(I2C_ADDR, bits_low)
-        lcd_toggle_enable(bits_low)
+        self.bus.write_byte(self.I2C_ADDR, bits_low)
+        self.lcd_toggle_enable(bits_low)
 
-    def lcd_toggle_enable(bits):
-        time.sleep(E_DELAY)
-        bus.write_byte(I2C_ADDR, (bits | ENABLE))
-        time.sleep(E_PULSE)
-        bus.write_byte(I2C_ADDR, (bits & ~ENABLE))
-        time.sleep(E_DELAY)
+    def lcd_toggle_enable(self, bits):
+        self.time.sleep(self.E_DELAY)
+        self.bus.write_byte(self.I2C_ADDR, (bits | self.ENABLE))
+        self.time.sleep(self.E_PULSE)
+        self.bus.write_byte(self.I2C_ADDR, (bits & ~self.ENABLE))
+        self.time.sleep(self.E_DELAY)
 
-    def lcd_string(message, line):
+    def lcd_string(self, message, line):
 
-        message = message.ljust(LCD_WIDTH, " ")
+        message = message.ljust(self.LCD_WIDTH, " ")
 
-        lcd_byte(line, LCD_CMD)
+        self.lcd_byte(line, self.LCD_CMD)
 
-        for i in range(LCD_WIDTH):
-            lcd_byte(ord(message[i]), LCD_CHR)
+        for i in range(self.LCD_WIDTH):
+            self.lcd_byte(ord(message[i]), self.LCD_CHR)
 
-    def main():
-
-        lcd_init()
+    def test(self):
 
         while True:
-            now = datetime.datetime.now()
+            now = self.datetime.datetime.now()
 
-            lcd_string("WHOOPIE goldberg", LCD_LINE_1)
-            lcd_string(str(now.hour) + ":" + str(now.minute), LCD_LINE_2)
-            time.sleep(1)
+            self.lcd_string("WHOOPIE goldberg", self.LCD_LINE_1)
+            self.lcd_string(str(now.hour) + ":" + str(now.minute), self.LCD_LINE_2)
+            self.time.sleep(1)
 
 
 if __name__ == '__main__':
 
     lcd = LcdDriver()
     try:
-        lcd.main()
+        lcd.test()
     except KeyboardInterrupt:
         pass
     finally:
-        lcd.lcd_byte(0x01, LCD_CMD)
+        lcd.lcd_byte(0x01, lcd.LCD_CMD)
