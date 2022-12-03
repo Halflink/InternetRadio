@@ -1,15 +1,14 @@
 #!/usr/bin/python
 
 class LcdDriver:
-
     import smbus
     import time
     import datetime
 
-    def __init__(self, lcd_address = 0x27, lcd_with = 16, lcd_lines = 2):
+    def __init__(self, lcd_address=0x27, lcd_with=16, lcd_lines=2):
 
         # Define some device constants
-        self.I2C_ADDR = lcd_address # I2C device address
+        self.I2C_ADDR = lcd_address  # I2C device address
         self.LCD_WIDTH = lcd_with  # Maximum characters per line
         self.LCD_CHR = 1  # Mode - Sending data
         self.LCD_CMD = 0  # Mode - Sending command
@@ -19,6 +18,7 @@ class LcdDriver:
         self.E_DELAY = 0.0005
         self.bus = self.smbus.SMBus(1)  # Rev 2 Pi uses 1
         self.lcd_line_address = []
+        self.unicode_degree = 176
 
         for i in range(lcd_lines):
             if i == 0:
@@ -42,7 +42,12 @@ class LcdDriver:
 
         bits_high = mode | (bits & 0xF0) | self.LCD_BACKLIGHT
         bits_low = mode | ((bits << 4) & 0xF0) | self.LCD_BACKLIGHT
-
+        print('mode:')
+        print(mode)
+        print('bits:')
+        print(bits)
+        print('bits_high:')
+        print(bits_high)
         self.bus.write_byte(self.I2C_ADDR, bits_high)
         self.lcd_toggle_enable(bits_high)
 
@@ -70,9 +75,9 @@ class LcdDriver:
         while True:
             now = self.datetime.datetime.now()
 
-            self.lcd_string("WHOOPIE goldberg", self.LCD_LINE_2)
+            self.lcd_string("WHOOPIE goldberg", self.lcd_line_address[1])
             stringetje = str(now.hour) + ":" + str(now.minute) + " ola"
-            self.lcd_string(stringetje, self.LCD_LINE_1)
+            self.lcd_string(stringetje, self.lcd_line_address[0])
             print(stringetje)
             self.time.sleep(1)
 
