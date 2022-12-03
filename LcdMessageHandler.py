@@ -22,7 +22,7 @@ class LcdMessageHandler:
         display_message = self.current_message[self.message_start:self.message_end].rjust(self.lcd_width, ' ')
         print(display_message)
         # set new range to display
-        if self.message_end == len(self.current_message) - 1:
+        if self.message_end < len(self.current_message):
             self.message_end = self.message_end + 1
             if self.message_start < self.message_end - 15:
                 self.message_start = self.message_end - 15
