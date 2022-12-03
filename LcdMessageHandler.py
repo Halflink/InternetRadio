@@ -20,7 +20,6 @@ class LcdMessageHandler:
     def display_news_ticker(self):
         work_message = self.current_message.ljust(len(self.current_message) + 15, ' ')
         display_message = work_message[self.message_start:self.message_end].rjust(self.lcd_width, ' ')
-        print(display_message)
 
         # set new range to display
         if self.message_end < len(work_message):
