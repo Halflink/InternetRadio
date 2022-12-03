@@ -10,7 +10,7 @@ class LcdMessageHandler:
     def get_datetime(self):
         # see https://docs.python.org/3/library/datetime.html#strftime-strptime-behavior
         current_time = self.datetime.datetime.now()
-        time_string = current_time.strftime('%H:%M %d %b %Y')
+        time_string = current_time.strftime('%H:%M:%S')
         return time_string
 
     def clock(self):
