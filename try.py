@@ -1,7 +1,5 @@
 #!/usr/bin/python
 
-print(ord("°"))
+bericht = 'http://playerservices.streamtheworld.com/api/livestream-redirect/KINK.mp3'
 
-stringetje = 'abcdefghijklmnopqrstuvwixyz'
-
-print(stringetje[0:16])
+wack = message.ljust(
