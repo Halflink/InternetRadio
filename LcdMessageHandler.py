@@ -47,6 +47,7 @@ if __name__ == '__main__':
     lcdMessage = LcdMessageHandler()
     bericht = 'http://playerservices.streamtheworld.com/api/livestream-redirect/KINK.mp3'
     lcdMessage.set_current_message(bericht)
+    print(lcdMessage.lcd_width)
     try:
         while True:
             lcdMessage.clock()
