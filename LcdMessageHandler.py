@@ -40,6 +40,8 @@ class LcdMessageHandler:
 
     def set_current_message(self, message):
         self.current_message = message
+        self.message_start = 0
+        self.message_end = 0
 
 
 if __name__ == '__main__':
