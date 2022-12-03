@@ -17,18 +17,18 @@ class LcdDriver:
         self.E_PULSE = 0.0005
         self.E_DELAY = 0.0005
         self.bus = self.smbus.SMBus(1)  # Rev 2 Pi uses 1
-        self.lcd_line_address = []
+        self.LCD_LINE_ADDRESS = []
         self.unicode_degree = 176
 
         for i in range(lcd_lines):
             if i == 0:
-                self.lcd_line_address.append(0x80)
+                self.LCD_LINE_ADDRESS.append(0x80)
             elif i == 1:
-                self.lcd_line_address.append(0xC0)
+                self.LCD_LINE_ADDRESS.append(0xC0)
             elif i == 2:
-                self.lcd_line_address.append(0x94)
+                self.LCD_LINE_ADDRESS.append(0x94)
             elif i == 3:
-                self.lcd_line_address.append(0xD4)
+                self.LCD_LINE_ADDRESS.append(0xD4)
 
         self.lcd_byte(0x33, self.LCD_CMD)  # 110011 Initialise
         self.lcd_byte(0x32, self.LCD_CMD)  # 110010 Initialise
@@ -42,12 +42,7 @@ class LcdDriver:
 
         bits_high = mode | (bits & 0xF0) | self.LCD_BACKLIGHT
         bits_low = mode | ((bits << 4) & 0xF0) | self.LCD_BACKLIGHT
-        print('mode:')
-        print(mode)
-        print('bits:')
-        print(bits)
-        print('bits_high:')
-        print(bits_high)
+
         self.bus.write_byte(self.I2C_ADDR, bits_high)
         self.lcd_toggle_enable(bits_high)
 
@@ -63,6 +58,7 @@ class LcdDriver:
 
     def lcd_string(self, message, line):
 
+        message = message[0:self.LCD_WIDTH]
         message = message.ljust(self.LCD_WIDTH, " ")
 
         self.lcd_byte(line, self.LCD_CMD)
@@ -75,9 +71,9 @@ class LcdDriver:
         while True:
             now = self.datetime.datetime.now()
 
-            self.lcd_string("WHOOPIE goldberg", self.lcd_line_address[1])
+            self.lcd_string("github", self.LCD_LINE_ADDRESS[1])
             stringetje = str(now.hour) + ":" + str(now.minute) + " ola"
-            self.lcd_string(stringetje, self.lcd_line_address[0])
+            self.lcd_string(stringetje, self.LCD_LINE_ADDRESS[0])
             print(stringetje)
             self.time.sleep(1)
 
