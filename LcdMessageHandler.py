@@ -18,14 +18,14 @@ class LcdMessageHandler:
         self.Lcd.lcd_string(self.get_datetime(), self.Lcd.LCD_LINE_ADDRESS[0])
 
     def display_news_ticker(self):
-
-        display_message = self.current_message[self.message_start:self.message_end].rjust(self.lcd_width, ' ')
+        work_message = self.current_message.ljust(len(self.current_message) + 15, ' ')
+        display_message = work_message[self.message_start:self.message_end].rjust(self.lcd_width, ' ')
         print(display_message)
         # set new range to display
-        if self.message_end < len(self.current_message):
+        if self.message_end < len(work_message):
             self.message_end = self.message_end + 1
-            if self.message_start < self.message_end - 15:
-                self.message_start = self.message_end - 15
+            if self.message_start < self.message_end - 16:
+                self.message_start = self.message_end - 16
 
         self.Lcd.lcd_string(display_message, self.Lcd.LCD_LINE_ADDRESS[1])
 
@@ -47,7 +47,7 @@ if __name__ == '__main__':
         while True:
             lcdMessage.clock()
             lcdMessage.display_news_ticker()
-            lcdMessage.time.sleep(1)
+            lcdMessage.time.sleep(0.2)
     except KeyboardInterrupt:
         pass
     finally:
