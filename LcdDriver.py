@@ -3,7 +3,6 @@
 class LcdDriver:
     import smbus
     import time
-    import datetime
 
     def __init__(self, lcd_address=0x27, lcd_with=16, lcd_lines=2):
 
@@ -66,15 +65,13 @@ class LcdDriver:
         for i in range(self.LCD_WIDTH):
             self.lcd_byte(ord(message[i]), self.LCD_CHR)
 
+    def clean_up(self):
+        self.lcd_byte(0x01, self.LCD_CMD)
+
     def test(self):
 
         while True:
-            now = self.datetime.datetime.now()
-
-            self.lcd_string("github", self.LCD_LINE_ADDRESS[1])
-            stringetje = str(now.hour) + ":" + str(now.minute) + " ola"
-            self.lcd_string(stringetje, self.LCD_LINE_ADDRESS[0])
-            print(stringetje)
+            self.lcd_string("github.com/halflink", self.LCD_LINE_ADDRESS[0])
             self.time.sleep(1)
 
 
@@ -86,4 +83,4 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         pass
     finally:
-        lcd.lcd_byte(0x01, lcd.LCD_CMD)
+        lcd.clean_up()
