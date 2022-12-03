@@ -18,7 +18,10 @@ class LcdMessageHandler:
         self.Lcd.lcd_string(self.get_datetime(), self.Lcd.LCD_LINE_ADDRESS[0])
 
     def display_news_ticker(self):
+        print('?1')
+        print(len(self.current_message))
         if len(self.current_message) == 16:
+            print('?2')
             display_message = self.current_message[self.message_start:self.message_end].rjust(self.lcd_width, ' ')
             print(display_message)
             # set new range to display
@@ -47,7 +50,6 @@ if __name__ == '__main__':
     lcdMessage = LcdMessageHandler()
     bericht = 'http://playerservices.streamtheworld.com/api/livestream-redirect/KINK.mp3'
     lcdMessage.set_current_message(bericht)
-    print(lcdMessage.lcd_width)
     try:
         while True:
             lcdMessage.clock()
