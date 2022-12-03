@@ -29,7 +29,7 @@ class LcdMessageHandler:
                 else:
                     self.message_end == self.message_end - 1
             else:
-                self.message_start = self.message_start - -1
+                self.message_start = self.message_start - 1
 
             self.Lcd.lcd_string(display_message, self.Lcd.LCD_LINE_ADDRESS[1])
 
