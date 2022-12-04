@@ -69,6 +69,7 @@ if __name__ == '__main__':
             i = i + 1
             if i > len(berichten)-1:
                 i = 0
+            lcdMessage.time.sleep(2)
 
     except KeyboardInterrupt:
         pass
