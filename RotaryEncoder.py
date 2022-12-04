@@ -7,7 +7,7 @@ class RotaryEncoder:
         self.clk = 13
         self.dt = 6
 
-        self.GPIO.setmode(GPIO.BCM)
+        self.GPIO.setmode(self.GPIO.BCM)
         self.GPIO.setup(self.clk, self.GPIO.IN, pull_up_down=self.GPIO.PUD_DOWN)
         self.GPIO.setup(self.dt, self.GPIO.IN, pull_up_down=self.GPIO.PUD_DOWN)
 
