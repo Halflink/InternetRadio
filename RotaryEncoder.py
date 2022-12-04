@@ -4,12 +4,12 @@ class RotaryEncoder:
     from time import sleep
 
     def __init__(self):
-        self.clk = 13
-        self.dt = 6
+        self.clk = 6
+        self.dt = 13
 
         self.GPIO.setmode(self.GPIO.BCM)
-        self.GPIO.setup(self.clk, self.GPIO.IN, pull_up_down=self.GPIO.PUD_DOWN)
-        self.GPIO.setup(self.dt, self.GPIO.IN, pull_up_down=self.GPIO.PUD_DOWN)
+        self.GPIO.setup(self.clk, self.GPIO.IN, pull_up_down=self.GPIO.PUD_UP)
+        self.GPIO.setup(self.dt, self.GPIO.IN, pull_up_down=self.GPIO.PUD_UP)
 
         self.counter = 0
         self.clkLastState = self.GPIO.input(self.clk)
