@@ -30,6 +30,6 @@ if __name__ == '__main__':
                     rotaryEncoder.counter -= 1
                 print(rotaryEncoder.counter)
             rotaryEncoder.clkLastState = clkState
-            rotaryEncoder.sleep(0.0001)
+            rotaryEncoder.sleep(0.1)
     finally:
         rotaryEncoder.GPIO.cleanup()
