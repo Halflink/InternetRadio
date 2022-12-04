@@ -8,8 +8,8 @@ class RotaryEncoder:
         self.dt = 13
 
         self.GPIO.setmode(self.GPIO.BCM)
-        self.GPIO.setup(self.clk, self.GPIO.IN, pull_up_down=self.GPIO.PUD_UP)
-        self.GPIO.setup(self.dt, self.GPIO.IN, pull_up_down=self.GPIO.PUD_UP)
+        self.GPIO.setup(self.clk, self.GPIO.IN, pull_up_down=self.GPIO.PUD_DOWN)
+        self.GPIO.setup(self.dt, self.GPIO.IN, pull_up_down=self.GPIO.PUD_DOWN)
 
         self.counter = 0
         self.clkLastState = self.GPIO.input(self.clk)
@@ -30,6 +30,6 @@ if __name__ == '__main__':
                     rotaryEncoder.counter -= 1
                 print(rotaryEncoder.counter)
             rotaryEncoder.clkLastState = clkState
-            rotaryEncoder.sleep(0.01)
+            rotaryEncoder.sleep(0.0001)
     finally:
         rotaryEncoder.GPIO.cleanup()
