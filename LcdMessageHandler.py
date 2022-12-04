@@ -38,8 +38,8 @@ class LcdMessageHandler:
         self.Lcd.lcd_string(display_message, self.Lcd.LCD_LINE_ADDRESS[1])
 
     def display_selector(self, current_option, next_option):
-        display_line_0 = '>' + current_option.ljust(self.lcd_width-2, ' ')[0:13] + '<'
-        display_line_1 = ' ' + next_option.ljust(self.lcd_width - 2, ' ')[0:13] + ' '
+        display_line_0 = '>' + current_option.ljust(self.lcd_width, ' ')[0:14] + '<'
+        display_line_1 = ' ' + next_option.ljust(self.lcd_width, ' ')[0:14] + ' '
         self.Lcd.lcd_string(display_line_0, self.Lcd.LCD_LINE_ADDRESS[0])
         self.Lcd.lcd_string(display_line_1, self.Lcd.LCD_LINE_ADDRESS[1])
 
