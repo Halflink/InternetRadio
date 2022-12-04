@@ -1,5 +1,5 @@
 #!/usr/bin/python
+import sys
 
-bericht = 'http://playerservices.streamtheworld.com/api/livestream-redirect/KINK.mp3'
-
-wack = message.ljust(
+wack = chr(2190)
+print(wack)

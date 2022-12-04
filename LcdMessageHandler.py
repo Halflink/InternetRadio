@@ -11,6 +11,11 @@ class LcdMessageHandler:
         self.message_end = 0
         self.current_message = ''
 
+    def cap_string(input, size):
+
+        if len(input) > size:
+            input = input[0:size]
+
     def clean_up(self):
         self.Lcd.clean_up()
 
@@ -32,6 +37,12 @@ class LcdMessageHandler:
 
         self.Lcd.lcd_string(display_message, self.Lcd.LCD_LINE_ADDRESS[1])
 
+    def display_selector(self, current_option, next_option):
+        display_line_0 = '>' + current_option.ljust(self.lcd_width-2, ' ')[0:13] + '<'
+        display_line_1 = ' ' + next_option.ljust(self.lcd_width - 2, ' ')[0:13] + ' '
+        self.Lcd.lcd_string(display_line_0, self.Lcd.LCD_LINE_ADDRESS[0])
+        self.Lcd.lcd_string(display_line_1, self.Lcd.LCD_LINE_ADDRESS[1])
+
     def get_datetime(self):
         # see https://docs.python.org/3/library/datetime.html#strftime-strptime-behavior
         current_time = self.datetime.datetime.now()
@@ -46,13 +57,19 @@ class LcdMessageHandler:
 
 if __name__ == '__main__':
     lcdMessage = LcdMessageHandler()
-    bericht = 'http://playerservices.streamtheworld.com/api/livestream-redirect/KINK.mp3'
-    lcdMessage.set_current_message(bericht)
+    berichten = ['Today - The Smashing Pumpkins', 'Enter The Sandman - Metallica',
+                 'Black Hole Sun - Soundgarden', 'No Rain - Blind Melon']
+    i = 0
     try:
         while True:
-            lcdMessage.clock()
-            lcdMessage.display_news_ticker()
-            lcdMessage.time.sleep(0.1)
+            k = i + 1
+            if k > len(berichten)-1:
+                k = 0
+            lcdMessage.display_selector(berichten[i], berichten[k])
+            i = i + 1
+            if i > len(berichten)-1:
+                i = 0
+
     except KeyboardInterrupt:
         pass
     finally:
