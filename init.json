@@ -1,0 +1,28 @@
+{
+	"lcd settings": {
+		"address": "0x27",
+		"lines": 2,
+		"width": 16
+	},
+	"url list": [
+		{
+			"station": "KINK punt NL",
+			"url": "http://playerservices.streamtheworld.com/api/livestream-redirect/KINK.mp3"
+		},
+		{
+			"station": "KINK DNA",
+			"url": "http://playerservices.streamtheworld.com/pls/KINK_DNAAAC.pls"
+		},
+		{
+			"station": "KINK DISTORTION",
+			"url": "https://playerservices.streamtheworld.com/pls/KINK_DISTORTIONAAC.pls"
+		},
+		{
+			"station": "KINK INDIE",
+			"url": "https://playerservices.streamtheworld.com/pls/KINKINDIEAAC.pls"
+		}
+	]
+}
+
+
+    
