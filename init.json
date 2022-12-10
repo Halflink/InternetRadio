@@ -20,6 +20,14 @@
 		{
 			"station": "KINK INDIE",
 			"url": "https://playerservices.streamtheworld.com/api/livestream-redirect/KINKINDIE.mp3"
+		},
+		{
+			"station": "Delta Grunge",
+			"url": "http://streams.deltaradio.de/delta-grunge/mp3-192"
+		},
+		{
+			"station": "Delta Alternative",
+			"url": "http://streams.deltaradio.de/delta-alternative/mp3-192"
 		}
 	]
 }
