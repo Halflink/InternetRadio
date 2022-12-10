@@ -44,6 +44,7 @@ class RotaryEncoder:
     def check_switch_state(self):
         switch_state = self.GPIO.input(self.switch)
         self.sleep(0.05)
+        print(switch_state)
         return switch_state == 1
 
 
@@ -54,10 +55,10 @@ if __name__ == '__main__':
     try:
 
         while True:
-            rotaryEncoder.check_rotary_state()
+            # rotaryEncoder.check_rotary_state()
             rotaryEncoder.check_switch_state()
-            if rotaryEncoder.check_switch_state():
-                print(rotaryEncoder.counter)
-            rotaryEncoder.sleep(0.001)
+            #if rotaryEncoder.check_switch_state():
+            #    print(rotaryEncoder.counter)
+            #rotaryEncoder.sleep(0.001)
     finally:
         rotaryEncoder.GPIO.cleanup()
