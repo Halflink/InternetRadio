@@ -86,7 +86,7 @@ class Radio:
 
 if __name__ == '__main__':
     radio = Radio()
-    radio.play_media('https://playerservices.streamtheworld.com/api/livestream-redirect/KINK_DISTORTION.mp3 ')
+    radio.play_media('https://playerservices.streamtheworld.com/api/livestream-redirect/KINK_DISTORTION.mp3')
     while True:
         pass
 
