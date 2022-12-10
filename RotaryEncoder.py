@@ -37,7 +37,7 @@ class RotaryEncoder:
         if state != self.last_state:
             print(state)
 
-        self.sleep(0.01)
+        # self.sleep(0.01)
         self.last_state = state
 
     def check_switch_state(self):
