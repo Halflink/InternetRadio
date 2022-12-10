@@ -55,7 +55,7 @@ class RotaryEncoder:
 
 if __name__ == '__main__':
 
-    rotaryEncoder = RotaryEncoder(clk_GPIO=6, dt_GPIO=13, switch_GPIO=5, min_counter=0, max_counter=100,
+    rotaryEncoder = RotaryEncoder(clk_GPIO=6, dt_GPIO=13, switch_GPIO=5, min_counter=0, max_counter=10,
                                   back_to_front=False)
     try:
 
