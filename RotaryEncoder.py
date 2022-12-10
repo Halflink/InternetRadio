@@ -38,7 +38,7 @@ class RotaryEncoder:
                 self.counter += 1
             else:
                 self.counter -= 1
-        self.clk_last_state = clkState
+        self.clk_last_state = clk_state
         self.check_rotary_counter()
 
     def check_switch_state(self):
