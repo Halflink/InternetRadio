@@ -18,7 +18,7 @@ class RotaryEncoder:
         self.GPIO.setup(self.switch, self.GPIO.IN, pull_up_down=self.GPIO.PUD_DOWN)
 
         self.counter = 0
-        self.clk_last_state = self.GPIO.input(self.clk)
+        self.last_state = "00"
 
     def check_rotary_counter(self):
         if self.back_to_front and self.counter > self.max_counter:
@@ -34,15 +34,11 @@ class RotaryEncoder:
         clk_state = self.GPIO.input(self.clk)
         dt_state = self.GPIO.input(self.dt)
         state = "{}{}".format(clk_state, dt_state)
-        if state != "00":
+        if state != self.last_state:
             print(state)
-        if clk_state != self.clk_last_state:
-            if dt_state != clk_state:
-                self.counter += 1
-            else:
-                self.counter -= 1
-        self.clk_last_state = clk_state
-        # self.check_rotary_counter()
+
+        self.sleep(0.01)
+        self.last_state = state
 
     def check_switch_state(self):
         switch_state = self.GPIO.input(self.switch)
