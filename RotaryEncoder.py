@@ -58,6 +58,6 @@ if __name__ == '__main__':
             rotaryEncoder.check_switch_state()
             #if rotaryEncoder.check_switch_state():
             print(rotaryEncoder.counter)
-            rotaryEncoder.sleep(0.001)
+            rotaryEncoder.sleep(0.01)
     finally:
         rotaryEncoder.GPIO.cleanup()
