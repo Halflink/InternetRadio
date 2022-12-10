@@ -13,8 +13,8 @@ class RotaryEncoder:
         self.back_to_front = back_to_front
 
         self.GPIO.setmode(self.GPIO.BCM)
-        self.GPIO.setup(self.clk, self.GPIO.IN, pull_up_down=self.GPIO.PUD_DOWN)
-        self.GPIO.setup(self.dt, self.GPIO.IN, pull_up_down=self.GPIO.PUD_DOWN)
+        self.GPIO.setup(self.clk, self.GPIO.IN, pull_up_down=self.GPIO.PUD_UP)
+        self.GPIO.setup(self.dt, self.GPIO.IN, pull_up_down=self.GPIO.PUD_UP)
         self.GPIO.setup(self.switch, self.GPIO.IN, pull_up_down=self.GPIO.PUD_DOWN)
 
         self.counter = 0
