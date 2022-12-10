@@ -43,7 +43,7 @@ class RotaryEncoder:
 
     def check_switch_state(self):
         switch_state = self.GPIO.input(self.switch)
-        self.time.sleep(0.05)
+        self.sleep(0.05)
         return switch_state == 1
 
 
