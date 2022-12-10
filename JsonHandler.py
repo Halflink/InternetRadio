@@ -8,14 +8,14 @@ class JsonHandler:
         with open("./init.json") as jsonFile:
             init_info = json.load(jsonFile)
             jsonFile.close()
-            hex_s = init_info['lcd settings']['Device bus']
+            hex_s = init_info['lcd settings']['address']
             self.lcd_settings_address = int(hex_s, 16)
             self.lcd_settings_lines = init_info['lcd settings']['lines']
             self.lcd_settings_width = init_info['lcd settings']['width']
             self.url_list = init_info['url list']
 
     def print_settings(self):
-        print("lcd_settings_address: " + hex(self.device_addr))
+        print("lcd_settings_address: " + hex(self.lcd_settings_address))
         print("lcd_settings_lines: {} ".format(self.lcd_settings_lines))
         print("lcd_settings_width: {} ".format(self.lcd_settings_width))
         no_of_urls = len(self.url_list)
