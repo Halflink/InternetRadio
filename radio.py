@@ -86,7 +86,7 @@ class Radio:
 
 if __name__ == '__main__':
     radio = Radio()
-    radio.play_media('http://streams.deltaradio.de/delta-grunge/mp3-192')
+    radio.play_media('http://playerservices.streamtheworld.com/api/livestream-redirect/KINK.mp3')
     while True:
         pass
 
