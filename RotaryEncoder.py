@@ -39,7 +39,7 @@ class RotaryEncoder:
             else:
                 self.counter -= 1
         self.clk_last_state = clk_state
-        self.check_rotary_counter()
+        # self.check_rotary_counter()
 
     def check_switch_state(self):
         switch_state = self.GPIO.input(self.switch)
