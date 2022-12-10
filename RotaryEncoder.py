@@ -41,6 +41,7 @@ class RotaryEncoder:
             if state == "01":
                 # Counterclockwise
                 self.counter -= 1
+            self.check_rotary_counter()
             print("State: {} counter: {}".format(state, self.counter))
 
         self.sleep(0.01)
