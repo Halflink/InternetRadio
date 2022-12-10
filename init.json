@@ -11,7 +11,7 @@
 		},
 		{
 			"station": "KINK DNA",
-			"url": "http://playerservices.streamtheworld.com/pls/KINK_DNAAAC.pls"
+			"url": "https://playerservices.streamtheworld.com/api/livestream-redirect/KINK_DNA.mp3"
 		},
 		{
 			"station": "KINK DISTORTION",
@@ -19,7 +19,7 @@
 		},
 		{
 			"station": "KINK INDIE",
-			"url": "https://playerservices.streamtheworld.com/pls/KINKINDIEAAC.pls"
+			"url": "https://playerservices.streamtheworld.com/api/livestream-redirect/KINKINDIE.mp3"
 		}
 	]
 }
