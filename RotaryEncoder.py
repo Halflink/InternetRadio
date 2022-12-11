@@ -35,16 +35,15 @@ class RotaryEncoder:
         clk_state = self.GPIO.input(self.clk)
         dt_state = self.GPIO.input(self.dt)
         state = "{}{}".format(clk_state, dt_state)
-        if state != self.last_state:
-            if state == "10":
+        if state != self.last_state and state == '11':
+            if self.last_state == '10':
                 # Clockwise
                 self.counter += 1
-            elif state == "01":
+            elif self.last_state == '01':
                 # Counterclockwise
                 self.counter -= 1
-            elif state == "11":
-                self.call_back()
             self.check_rotary_counter()
+            self.call_back()
 
         #self.sleep(0.01)
         print('Last state: {} new state: {} counter: {}'.format(self.last_state, state, self.counter))
