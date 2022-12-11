@@ -3,19 +3,21 @@ class RotaryEncoder:
     from RPi import GPIO
     from time import sleep
 
-    def __init__(self, clk_GPIO, dt_GPIO, switch_GPIO,  min_counter, max_counter, back_to_front):
+    def __init__(self, clk_GPIO, dt_GPIO, switch_GPIO,  min_counter, max_counter, back_to_front, call_back=None):
         self.clk = clk_GPIO  # 6
         self.dt = dt_GPIO  # 13
         self.switch = switch_GPIO
-
         self.max_counter = max_counter
         self.min_counter = min_counter
         self.back_to_front = back_to_front
+        self.call_back = call_back
 
         self.GPIO.setmode(self.GPIO.BCM)
         self.GPIO.setup(self.clk, self.GPIO.IN, pull_up_down=self.GPIO.PUD_DOWN)
         self.GPIO.setup(self.dt, self.GPIO.IN, pull_up_down=self.GPIO.PUD_DOWN)
         self.GPIO.setup(self.switch, self.GPIO.IN, pull_up_down=self.GPIO.PUD_DOWN)
+        self.GPIO.add_event_detect(self.clk, self.GPIO.BOTH, callback=self.check_rotary_counter())
+        self.GPIO.add_event_detect(self.dt, self.GPIO.BOTH, callback=self.check_rotary_counter())
 
         self.counter = 0
         self.last_state = "00"
@@ -42,8 +44,9 @@ class RotaryEncoder:
                 # Counterclockwise
                 self.counter -= 1
             self.check_rotary_counter()
-            print("State: {} counter: {}".format(state, self.counter))
+            # print("State: {} counter: {}".format(state, self.counter))
 
+        self.call_back()
         self.sleep(0.01)
         self.last_state = state
 
@@ -62,8 +65,6 @@ if __name__ == '__main__':
         while True:
             rotaryEncoder.check_rotary_state()
             rotaryEncoder.check_switch_state()
-            #if rotaryEncoder.check_switch_state():
-            #print(rotaryEncoder.counter)
             rotaryEncoder.sleep(0.01)
     finally:
         rotaryEncoder.GPIO.cleanup()
