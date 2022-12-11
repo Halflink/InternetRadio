@@ -11,6 +11,8 @@ class RotaryEncoder:
         self.min_counter = min_counter
         self.back_to_front = back_to_front
         self.call_back = call_back
+        self.counter = 0
+        self.last_state = "00"
 
         self.GPIO.setmode(self.GPIO.BCM)
         self.GPIO.setup(self.clk, self.GPIO.IN, pull_up_down=self.GPIO.PUD_DOWN)
@@ -18,9 +20,6 @@ class RotaryEncoder:
         self.GPIO.setup(self.switch, self.GPIO.IN, pull_up_down=self.GPIO.PUD_DOWN)
         self.GPIO.add_event_detect(self.clk, self.GPIO.BOTH, callback=self.check_rotary_counter())
         self.GPIO.add_event_detect(self.dt, self.GPIO.BOTH, callback=self.check_rotary_counter())
-
-        self.counter = 0
-        self.last_state = "00"
 
     def check_rotary_counter(self):
         if self.back_to_front and self.counter > self.max_counter:
