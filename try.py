@@ -9,7 +9,7 @@ class TryOut:
                                                 back_to_front=False)
 
     def test(self):
-        print(self.rotaryEncoder.counter)
+        print("yay")
 
 
 if __name__ == '__main__':
