@@ -58,8 +58,11 @@ class RotaryEncoder:
 
 if __name__ == '__main__':
 
+    def tryOut():
+        print("yay")
+
     rotaryEncoder = RotaryEncoder(clk_GPIO=6, dt_GPIO=13, switch_GPIO=5, min_counter=0, max_counter=10,
-                                  back_to_front=False)
+                                  back_to_front=False, call_back=tryOut)
     try:
 
         while True:
