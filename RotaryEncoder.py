@@ -39,14 +39,15 @@ class RotaryEncoder:
             if state == "10":
                 # Clockwise
                 self.counter += 1
-            if state == "01":
+            elif state == "01":
                 # Counterclockwise
                 self.counter -= 1
+            elif state == "11":
+                self.call_back()
             self.check_rotary_counter()
-            print("State: {} counter: {}".format(state, self.counter))
 
-        self.call_back()
-        self.sleep(0.01)
+        #self.sleep(0.01)
+        print('Last state: {} new state: {} counter: {}'.format(self.last_state, state, self.counter))
         self.last_state = state
 
     def check_switch_state(self):
