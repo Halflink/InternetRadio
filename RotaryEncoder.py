@@ -43,7 +43,7 @@ class RotaryEncoder:
                 # Counterclockwise
                 self.counter -= 1
             self.check_rotary_counter()
-            # print("State: {} counter: {}".format(state, self.counter))
+            print("State: {} counter: {}".format(state, self.counter))
 
         self.call_back()
         self.sleep(0.01)
