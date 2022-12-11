@@ -29,7 +29,12 @@
 			"station": "Delta Alternative",
 			"url": "http://streams.deltaradio.de/delta-alternative/mp3-192"
 		}
-	]
+	],
+	"url rotary settings": {
+		"clk gpio": 6,
+		"dt gpio": 13,
+		"switch gpio": 5
+	}
 }
 
 
