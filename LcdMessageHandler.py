@@ -23,8 +23,8 @@ class LcdMessageHandler:
     def clock(self):
         self.Lcd.lcd_string(self.get_datetime(), self.Lcd.LCD_LINE_ADDRESS[0])
 
-    def display_line(self, text):
-        text = self.cap_string(text)
+    def display_line(self):
+        text = self.cap_string(self.current_message)
         self.Lcd.lcd_string(text, self.Lcd.LCD_LINE_ADDRESS[1])
 
     def display_news_ticker(self):
