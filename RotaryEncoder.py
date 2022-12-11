@@ -31,7 +31,7 @@ class RotaryEncoder:
         elif not self.back_to_front and self.counter < self.min_counter:
             self.counter = self.min_counter
 
-    def check_rotary_state(self):
+    def check_rotary_state(self, channel):
         clk_state = self.GPIO.input(self.clk)
         dt_state = self.GPIO.input(self.dt)
         state = "{}{}".format(clk_state, dt_state)
@@ -65,8 +65,7 @@ if __name__ == '__main__':
     try:
 
         while True:
-            rotaryEncoder.check_rotary_state()
-            rotaryEncoder.check_switch_state()
-            rotaryEncoder.sleep(0.01)
+            rotaryEncoder.sleep(5)
+            print('Value is {}'.format(rotaryEncoder.counter))
     finally:
         rotaryEncoder.GPIO.cleanup()
