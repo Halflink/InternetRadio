@@ -4,23 +4,28 @@ class LcdMessageHandler:
     import time
     import datetime
 
-    def __init__(self):
-        self.lcd_width = 16
-        self.Lcd = self.LcdDriver(lcd_address=0x27, lcd_with=self.lcd_width, lcd_lines=2)
+    def __init__(self, lcd_address=0x27, lcd_width=16, lcd_lines=2):
+        self.lcd_width = lcd_width
+        self.Lcd = self.LcdDriver(lcd_address=lcd_address, lcd_with=self.lcd_width, lcd_lines=lcd_lines)
         self.message_start = 0
         self.message_end = 0
         self.current_message = ''
 
-    def cap_string(input, size):
-
-        if len(input) > size:
-            input = input[0:size]
+    @staticmethod
+    def cap_string(text, size):
+        if len(text) > size:
+            text = text[0:size]
+        return text
 
     def clean_up(self):
         self.Lcd.clean_up()
 
     def clock(self):
         self.Lcd.lcd_string(self.get_datetime(), self.Lcd.LCD_LINE_ADDRESS[0])
+
+    def display_line(self, text):
+        text = self.cap_string(text)
+        self.Lcd.lcd_string(text, self.Lcd.LCD_LINE_ADDRESS[1])
 
     def display_news_ticker(self):
         work_message = self.current_message.ljust(len(self.current_message) + 15, ' ')

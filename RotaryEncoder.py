@@ -45,8 +45,6 @@ class RotaryEncoder:
             self.check_rotary_counter()
             self.call_back()
 
-        #self.sleep(0.01)
-        print('Last state: {} new state: {} counter: {}'.format(self.last_state, state, self.counter))
         self.last_state = state
 
     def check_switch_state(self):

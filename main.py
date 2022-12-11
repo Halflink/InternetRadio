@@ -1,31 +1,37 @@
 #!/usr/bin/python
 #
-# Requisites
-# updated/installed MPC / MPD: sudo apt-get install mpd mpc
-# Installed pyalsaaudio: sudo pip3 install pyalsaaudio
-# added snd_bcm2835 to /etc/modules to boot sound
 #
-# tested with:
 # https://playerservices.streamtheworld.com/api/livestream-redirect/KINK.mp3
 
-class MainRadio:
+class Main:
 
-    # import
-    import os
-    import alsaaudio as alsaaudio
-    import sys
+    from JsonHandler import JsonHandler
+    from LcdMessageHandler import LcdMessageHandler
+    from time import sleep
 
-    #def __init__(self):
-    #    mixer = self.alsaaudio.Mixer('HDMI')
-    #    mixer.setvolume(50)
-    #    currentvol = mixer.getvolume()
-    #    currentvol = int(currentvol[0])
+    def __init__(self):
 
-    def get_devices(self):
-        for device in self.alsaaudio.pcms('PCM_PLAYBACK'):
-            print("Device:", device)
+        jsonHandler = self.JsonHandler()
+        self.lcdMessageHandler = self.LcdMessageHandler(lcd_address=jsonHandler.lcd_settings_address,
+                                                        lcd_width=jsonHandler.lcd_settings_width,
+                                                        lcd_lines=jsonHandler.lcd_settings_lines)
+
+        self.url_list = jsonHandler.url_list
+        self.current_url = 0
+        self.set_station(self.current_url)
+        self.set_lcd()
+
+    def set_lcd(self):
+        self.lcdMessageHandler.clock()
+        self.lcdMessageHandler.display_line()
+
+    def set_station(self, station_no):
+        self.current_url = station_no
+        self.lcdMessageHandler.set_current_message(self.url_list[self.current_url]['station'])
 
 
 if __name__ == '__main__':
-    mainRadio = MainRadio()
-    mainRadio.get_devices()
+    main = Main()
+    while True:
+        main.sleep(1)
+        main.set_lcd()
