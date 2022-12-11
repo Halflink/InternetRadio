@@ -15,6 +15,8 @@ class LcdMessageHandler:
     def cap_string(text, size):
         if len(text) > size:
             text = text[0:size]
+        elif len(text) < size:
+            text = text.ljust(size, ' ')
         return text
 
     def clean_up(self):
@@ -24,7 +26,7 @@ class LcdMessageHandler:
         self.Lcd.lcd_string(self.get_datetime(), self.Lcd.LCD_LINE_ADDRESS[0])
 
     def display_line(self):
-        text = self.cap_string(self.current_message)
+        text = self.cap_string(self.current_message, self.lcd_width)
         self.Lcd.lcd_string(text, self.Lcd.LCD_LINE_ADDRESS[1])
 
     def display_news_ticker(self):
@@ -43,8 +45,8 @@ class LcdMessageHandler:
         self.Lcd.lcd_string(display_message, self.Lcd.LCD_LINE_ADDRESS[1])
 
     def display_selector(self, current_option, next_option):
-        display_line_0 = '>' + current_option.ljust(self.lcd_width, ' ')[0:14] + '<'
-        display_line_1 = ' ' + next_option.ljust(self.lcd_width, ' ')[0:14] + ' '
+        display_line_0 = '>' + self.cap_string(current_option, self.lcd_width-2) + '<'
+        display_line_1 = ' ' + self.cap_string(next_option, self.lcd_width-2) + ' '
         self.Lcd.lcd_string(display_line_0, self.Lcd.LCD_LINE_ADDRESS[0])
         self.Lcd.lcd_string(display_line_1, self.Lcd.LCD_LINE_ADDRESS[1])
 
