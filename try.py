@@ -9,7 +9,7 @@ class TryOut:
                                                 back_to_front=False)
 
     def test(self):
-        print("yay")
+        print('State: {}  Value: {}'.format(self.rotaryEncoder.last_state, self.rotaryEncoder.counter))
 
 
 if __name__ == '__main__':
