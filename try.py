@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+from time import sleep
 
 class TryOut:
     from RotaryEncoder import RotaryEncoder
@@ -14,3 +15,6 @@ class TryOut:
 
 if __name__ == '__main__':
     tryOut = TryOut()
+    while True:
+        sleep(5)
+        print('heartbeat')
