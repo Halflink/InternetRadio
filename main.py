@@ -114,8 +114,8 @@ class Main:
         self.current_url_no = counter
         self.set_station(self.current_url_no)
 
-    def toggle_mute(self):
-        print('mute')
+    def toggle_mute(self, counter):
+        print('mute: {}'.format(counter))
 
 if __name__ == '__main__':
     main = Main()
