@@ -36,7 +36,10 @@ class Main:
         self.current_url = station_no
         self.lcdMessageHandler.set_current_message(self.url_list[self.current_url]['station'])
 
-    def test
+    def test(self):
+        self.lcdMessageHandler.display_selector('test line 1', 'test line 2')
+        self.sleep(5)
+
 
 if __name__ == '__main__':
     main = Main()
