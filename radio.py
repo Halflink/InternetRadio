@@ -5,6 +5,7 @@
 #
 # tested with:
 # http://playerservices.streamtheworld.com/api/livestream-redirect/KINK.mp3
+# https://playerservices.streamtheworld.com/api/livestream-redirect/KINK_DISTORTION.mp3
 class Radio:
     import time
     import vlc
