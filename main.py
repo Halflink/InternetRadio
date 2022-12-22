@@ -9,7 +9,7 @@ class Main:
     from LcdMessageHandler import LcdMessageHandler
     from RotaryEncoder import RotaryEncoder
     from time import sleep
-    from timer import Timer as timer
+    from timer import Timer
 
     def __init__(self):
 
@@ -21,6 +21,7 @@ class Main:
         self.url_list = jsonHandler.url_list
         self.current_url = 0
         self.set_station(self.current_url)
+        self.timer = self.Timer()
         self.state_play = 'PLAY'
         self.state_select = 'SELECT'
         self.state = self.state_play
