@@ -31,7 +31,7 @@ class Main:
                                                  dt_GPIO=jsonHandler.url_rotary_settings_dt_gpio,
                                                  switch_GPIO=jsonHandler.url_rotary_settings_switch_gpio,
                                                  min_counter=0, max_counter=len(self.url_list)-1,
-                                                 back_to_front=True, call_back=self.test)
+                                                 back_to_front=True, call_back=self.set_selector)
 
     def get_station_name(self, no):
         if no < 0:
@@ -54,6 +54,18 @@ class Main:
         else:
             return False
 
+    def run_radio(self):
+        while True:
+            self.sleep(0.1)
+            if self.is_state_play():
+                self.set_lcd()
+            elif self.is_state_select() and self.timer.has_time_elapsed(5):
+                self.playListRotary.counter = self.current_url
+                self.set_state_play()
+            elif self.is_state_select():
+                self.lcdMessageHandler.display_selector(self.get_station_name(self.playListRotary.counter),
+                                                        self.get_station_name(self.playListRotary.counter + 1))
+
     def set_lcd(self):
         self.lcdMessageHandler.clock()
         self.lcdMessageHandler.display_line()
@@ -68,7 +80,7 @@ class Main:
     def set_state_select(self):
         self.state = self.state_select
 
-    def test(self):
+    def set_selector(self):
         self.set_state_select()
         self.timer.start()
         print(self.playListRotary.counter)
@@ -76,12 +88,4 @@ class Main:
 
 if __name__ == '__main__':
     main = Main()
-    while True:
-        main.sleep(0.1)
-        if main.is_state_play():
-            main.set_lcd()
-        elif main.is_state_select() and main.timer.has_time_elapsed(5):
-            main.set_state_play()
-        elif main.is_state_select():
-            main.lcdMessageHandler.display_selector(main.get_station_name(main.playListRotary.counter),
-                                                    main.get_station_name(main.playListRotary.counter+1))
+    main.run_radio()

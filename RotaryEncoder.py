@@ -3,7 +3,8 @@ class RotaryEncoder:
     from RPi import GPIO
     from time import sleep
 
-    def __init__(self, clk_GPIO, dt_GPIO, switch_GPIO,  min_counter, max_counter, back_to_front, call_back=None):
+    def __init__(self, clk_GPIO, dt_GPIO, switch_GPIO,  min_counter, max_counter, back_to_front, call_back=None,
+                 call_back_switch=None):
         self.clk = clk_GPIO  # 6
         self.dt = dt_GPIO  # 13
         self.switch = switch_GPIO
@@ -11,6 +12,7 @@ class RotaryEncoder:
         self.min_counter = min_counter
         self.back_to_front = back_to_front
         self.call_back = call_back
+        self.call_back_switch = call_back_switch
         self.counter = 0
         self.last_state = "00"
 
@@ -20,6 +22,7 @@ class RotaryEncoder:
         self.GPIO.setup(self.switch, self.GPIO.IN, pull_up_down=self.GPIO.PUD_DOWN)
         self.GPIO.add_event_detect(self.clk, self.GPIO.BOTH, callback=self.check_rotary_state)
         self.GPIO.add_event_detect(self.dt, self.GPIO.BOTH, callback=self.check_rotary_state)
+        self.GPIO.add_event_detect(self.switch, self.GPIO.BOTH, callback=self.check_switch_state)
 
     def check_rotary_counter(self):
         if self.back_to_front and self.counter > self.max_counter:
@@ -47,23 +50,9 @@ class RotaryEncoder:
 
         self.last_state = state
 
-    def check_switch_state(self):
-        switch_state = self.GPIO.input(self.switch)
+    def check_switch_state(self, channel):
+        switch_state = self.GPIO.input(self.switch) == 1
+        print(switch_state)
         self.sleep(0.05)
-        return switch_state == 0
+        self.call_back_switch(switch_state)
 
-
-if __name__ == '__main__':
-
-    def tryOut():
-        print("yay")
-
-    rotaryEncoder = RotaryEncoder(clk_GPIO=6, dt_GPIO=13, switch_GPIO=5, min_counter=0, max_counter=10,
-                                  back_to_front=False, call_back=tryOut)
-    try:
-
-        while True:
-            rotaryEncoder.sleep(5)
-            print('Value is {}'.format(rotaryEncoder.counter))
-    finally:
-        rotaryEncoder.GPIO.cleanup()
