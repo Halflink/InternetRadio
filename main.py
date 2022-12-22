@@ -84,4 +84,4 @@ if __name__ == '__main__':
             main.set_state_play()
         elif main.is_state_select():
             main.lcdMessageHandler.display_selector(main.get_station_name(main.playListRotary.counter),
-                                                    main.playListRotary.counter+1)
+                                                    main.get_station_name(main.playListRotary.counter+1))
