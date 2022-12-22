@@ -22,6 +22,10 @@ class LcdMessageHandler:
     def clean_up(self):
         self.Lcd.clean_up()
 
+    def clock_volume(self, volume):
+        line = self.get_datetime() + '   ' + u'\u2669' + volume
+        self.Lcd.lcd_string(line, self.Lcd.LCD_LINE_ADDRESS[0])
+
     def clock(self):
         self.Lcd.lcd_string(self.get_datetime(), self.Lcd.LCD_LINE_ADDRESS[0])
 
