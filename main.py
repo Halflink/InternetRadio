@@ -40,7 +40,7 @@ class Main:
             index = 0
         else:
             index = no
-        return self.url_list[no]['station']
+        return self.url_list[index]['station']
 
     def is_state_play(self):
         if self.state == self.state_play:
