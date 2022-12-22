@@ -115,8 +115,8 @@ class Main:
         self.set_station(self.current_url_no)
 
     def toggle_mute(self, counter):
+        self.radio.toggle_mute()
 
-        print('mute: {}'.format(counter))
 
 if __name__ == '__main__':
     main = Main()
