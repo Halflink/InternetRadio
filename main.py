@@ -86,7 +86,8 @@ class Main:
         self.state = self.state_select
 
     def set_select(self, counter):
-        print('Counter {}'.format(counter))
+        self.current_url = counter
+        self.set_station(self.current_url)
 
 
 if __name__ == '__main__':

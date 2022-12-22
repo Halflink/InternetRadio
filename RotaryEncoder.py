@@ -55,7 +55,6 @@ class RotaryEncoder:
         if state == 1:
             selected = self.counter
             self.call_back_switch(selected)
-        print(state)
         self.sleep(0.05)
 
 
