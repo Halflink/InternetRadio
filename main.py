@@ -94,6 +94,7 @@ class Main:
 
     def run_volume_select(self):
         print(self.volumeRotary.counter)
+        self.radio.set_volume(self.volumeRotary.counter)
 
     def set_lcd(self):
         self.lcdMessageHandler.clock()
