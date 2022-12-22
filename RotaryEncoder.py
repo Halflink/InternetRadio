@@ -23,7 +23,7 @@ class RotaryEncoder:
 
     def check_rotary_counter(self):
         if self.back_to_front and self.counter > self.max_counter:
-            self.counter = self.mix_counter
+            self.counter = self.min_counter
         elif self.back_to_front and self.counter < self.min_counter:
             self.counter = self.max_counter
         elif not self.back_to_front and self.counter > self.max_counter:
