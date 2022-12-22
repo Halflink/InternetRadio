@@ -97,7 +97,7 @@ class Main:
         self.radio.set_volume(self.volumeRotary.counter)
 
     def set_lcd(self):
-        self.lcdMessageHandler.clock()
+        self.lcdMessageHandler.clock_volume(self.radio.volume)
         self.lcdMessageHandler.display_line()
 
     def set_station(self, station_no):
