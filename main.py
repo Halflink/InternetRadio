@@ -33,7 +33,6 @@ class Main:
         self.lcd_state_play = 'PLAY'
         self.lcd_state_select = 'SELECT'
         self.lcd_state = self.lcd_state_play
-        self.set_lcd()
 
         # set up rotary: url selector
         self.playListRotary = self.RotaryEncoder(clk_GPIO=jsonHandler.url_rotary_settings_clk_gpio,
@@ -54,6 +53,7 @@ class Main:
         # set up radio
         self.radio = self.Radio()
         self.set_station(self.current_url_no)
+        self.set_lcd()
 
     def get_station_name(self, no):
         if no < 0:
