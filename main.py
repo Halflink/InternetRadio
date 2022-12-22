@@ -42,6 +42,15 @@ class Main:
                                                  min_counter=0, max_counter=len(self.url_list)-1,
                                                  back_to_front=True, call_back=self.run_selector,
                                                  call_back_switch=self.set_select)
+
+        # set up rotary: volume control
+        self.volumeRotary = self.RotaryEncoder(clk_GPIO=jsonHandler.volume_rotary_settings_clk_gpio,
+                                               dt_GPIO=jsonHandler.volume_rotary_settings_dt_gpio,
+                                               switch_GPIO=jsonHandler.volume_rotary_settings_switch_gpio,
+                                               min_counter=0, max_counter=99,
+                                               back_to_front=False, call_back=self.run_volume_select,
+                                               call_back_switch=self.toggle_mute)
+
         # set up radio
         self.radio = self.Radio()
         self.set_station(self.current_url_no)
@@ -82,7 +91,9 @@ class Main:
     def run_selector(self):
         self.set_lcd_state_select()
         self.timer.start()
-        print(self.playListRotary.counter)
+
+    def run_volume_select(self):
+        print(self.volumeRotary.counter)
 
     def set_lcd(self):
         self.lcdMessageHandler.clock()
@@ -103,6 +114,8 @@ class Main:
         self.current_url_no = counter
         self.set_station(self.current_url_no)
 
+    def toggle_mute(self):
+        print('mute')
 
 if __name__ == '__main__':
     main = Main()

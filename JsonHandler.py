@@ -16,6 +16,9 @@ class JsonHandler:
             self.url_rotary_settings_clk_gpio = init_info['url rotary settings']['clk gpio']
             self.url_rotary_settings_dt_gpio = init_info['url rotary settings']['dt gpio']
             self.url_rotary_settings_switch_gpio = init_info['url rotary settings']['switch gpio']
+            self.volume_rotary_settings_clk_gpio = init_info['volume rotary settings']['clk gpio']
+            self.volume_rotary_settings_dt_gpio = init_info['volume rotary settings']['dt gpio']
+            self.volume_rotary_settings_switch_gpio = init_info['volume rotary settings']['switch gpio']
 
     def print_settings(self):
         print("lcd_settings_address: " + hex(self.lcd_settings_address))
