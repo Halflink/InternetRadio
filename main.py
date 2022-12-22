@@ -37,8 +37,7 @@ class Main:
         self.lcdMessageHandler.set_current_message(self.url_list[self.current_url]['station'])
 
     def test(self):
-        self.lcdMessageHandler.display_selector('test line 1', 'test line 2')
-        self.sleep(5)
+        print(self.playListRotary.counter)
 
 
 if __name__ == '__main__':
