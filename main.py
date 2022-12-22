@@ -9,6 +9,7 @@ class Main:
     from LcdMessageHandler import LcdMessageHandler
     from RotaryEncoder import RotaryEncoder
     from time import sleep
+    from timer import Timer as timer
 
     def __init__(self):
 
@@ -59,6 +60,7 @@ class Main:
 
     def test(self):
         self.set_state_select()
+        self.timer.start()
         print(self.playListRotary.counter)
 
 
@@ -68,5 +70,7 @@ if __name__ == '__main__':
         main.sleep(0.1)
         if main.is_state_play():
             main.set_lcd()
+        elif main.is_state_select() and main.timer.has_time_elapsed(5):
+            main.set_state_play()
         elif main.is_state_select():
             main.lcdMessageHandler.display_selector('testline1', 'testline2')
