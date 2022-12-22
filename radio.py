@@ -43,6 +43,15 @@ class Radio:
         else:
             self.start_player_thread()
 
+    def set_volume(self, volume):
+        if 0 <= volume <= 100:
+            while self.volume < volume:
+                self.volume_up()
+                self.time.sleep(0.1)
+            while self.volume > volume:
+                self.volume_down()
+                self.time.sleep(0.1)
+
     def volume_up(self):
         if self.volume < 100:
             self.volume = self.volume + 1
