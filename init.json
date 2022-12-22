@@ -15,7 +15,7 @@
 		},
 		{
 			"station": "KINK DISTORTION",
-			"url": "https://playerservices.streamtheworld.com/pls/KINK_DISTORTION.pls"
+			"url": "https://playerservices.streamtheworld.com/api/livestream-redirect/KINK_DISTORTION.mp3"
 		},
 		{
 			"station": "KINK INDIE",
