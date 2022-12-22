@@ -10,17 +10,20 @@ class Main:
     from RotaryEncoder import RotaryEncoder
     from time import sleep
     from timer import Timer
+    from radio import Radio
 
     def __init__(self):
 
         jsonHandler = self.JsonHandler()
+
+        # Set up url list
+        self.url_list = jsonHandler.url_list
+        self.current_url_no = 0
+
+        # set up LCD
         self.lcdMessageHandler = self.LcdMessageHandler(lcd_address=jsonHandler.lcd_settings_address,
                                                         lcd_width=jsonHandler.lcd_settings_width,
                                                         lcd_lines=jsonHandler.lcd_settings_lines)
-
-        self.url_list = jsonHandler.url_list
-        self.current_url = 0
-        self.set_station(self.current_url)
 
         # LCD can have the following states: PLAY, showing the time and current radio station, and SELECT, showing
         # current selection on line 1 and the next on line 2. switching from one to the other state happens when you use
@@ -32,12 +35,16 @@ class Main:
         self.lcd_state = self.lcd_state_play
         self.set_lcd()
 
+        # set up rotary: url selector
         self.playListRotary = self.RotaryEncoder(clk_GPIO=jsonHandler.url_rotary_settings_clk_gpio,
                                                  dt_GPIO=jsonHandler.url_rotary_settings_dt_gpio,
                                                  switch_GPIO=jsonHandler.url_rotary_settings_switch_gpio,
                                                  min_counter=0, max_counter=len(self.url_list)-1,
                                                  back_to_front=True, call_back=self.run_selector,
                                                  call_back_switch=self.set_select)
+        # set up radio
+        self.radio = self.Radio()
+        self.set_station(self.current_url_no)
 
     def get_station_name(self, no):
         if no < 0:
@@ -66,7 +73,7 @@ class Main:
             if self.is_lcd_state_play():
                 self.set_lcd()
             elif self.is_lcd_state_select() and self.timer.has_time_elapsed(5):
-                self.playListRotary.counter = self.current_url
+                self.playListRotary.counter = self.current_url_no
                 self.set_lcd_state_play()
             elif self.is_lcd_state_select():
                 self.lcdMessageHandler.display_selector(self.get_station_name(self.playListRotary.counter),
@@ -82,8 +89,9 @@ class Main:
         self.lcdMessageHandler.display_line()
 
     def set_station(self, station_no):
-        self.current_url = station_no
-        self.lcdMessageHandler.set_current_message(self.url_list[self.current_url]['station'])
+        self.current_url_no = station_no
+        self.lcdMessageHandler.set_current_message(self.url_list[self.current_url_no]['station'])
+        self.radio.play_media(self.url_list[self.current_url_no]['url'])
 
     def set_lcd_state_play(self):
         self.lcd_state = self.lcd_state_play
@@ -92,8 +100,8 @@ class Main:
         self.lcd_state = self.lcd_state_select
 
     def set_select(self, counter):
-        self.current_url = counter
-        self.set_station(self.current_url)
+        self.current_url_no = counter
+        self.set_station(self.current_url_no)
 
 
 if __name__ == '__main__':
