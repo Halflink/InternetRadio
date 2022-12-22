@@ -33,6 +33,15 @@ class Main:
                                                  min_counter=0, max_counter=len(self.url_list)-1,
                                                  back_to_front=True, call_back=self.test)
 
+    def get_station_name(self, no):
+        if no < 0:
+            index = self.playListRotary.max_counter
+        elif no > self.playListRotary.max_counter:
+            index = 0
+        else:
+            index = no
+        return self.url_list[no]['station']
+
     def is_state_play(self):
         if self.state == self.state_play:
             return True
@@ -74,4 +83,5 @@ if __name__ == '__main__':
         elif main.is_state_select() and main.timer.has_time_elapsed(5):
             main.set_state_play()
         elif main.is_state_select():
-            main.lcdMessageHandler.display_selector('testline1', 'testline2')
+            main.lcdMessageHandler.display_selector(main.get_station_name(main.playListRotary.counter),
+                                                    main.playListRotary.counter+1)
