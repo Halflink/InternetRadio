@@ -13,7 +13,7 @@ class Radio:
     def __init__(self):
 
         # initiate variables
-        self.volume = 30
+        self.volume = 20
         self.current_url = ""
         self.stop_thread_event = self.threading.Event()
         self.new_url_event = self.threading.Event()
