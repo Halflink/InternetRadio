@@ -17,6 +17,7 @@ class Radio:
         self.current_url = ""
         self.stop_thread_event = self.threading.Event()
         self.new_url_event = self.threading.Event()
+        self.mute = False
 
         # creating a vlc instance
         self.vlc_instance = self.vlc.Instance()
@@ -43,8 +44,16 @@ class Radio:
         else:
             self.start_player_thread()
 
+    def toggle_mute(self):
+        if self.mute:
+            self.mute = False
+            self.player.audio_set_volume(self.volume)
+        else:
+            self.mute = True
+            self.player.audio_set_volume(0)
+
     def set_volume(self, volume):
-        if 0 <= volume <= 100:
+        if 0 <= volume <= 100 and not self.mute:
             self.volume = volume
             self.player.audio_set_volume(self.volume)
 

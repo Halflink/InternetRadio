@@ -93,7 +93,6 @@ class Main:
         self.timer.start()
 
     def run_volume_select(self):
-        print(self.volumeRotary.counter)
         self.radio.set_volume(self.volumeRotary.counter)
 
     def set_lcd(self):
@@ -116,6 +115,7 @@ class Main:
         self.set_station(self.current_url_no)
 
     def toggle_mute(self, counter):
+
         print('mute: {}'.format(counter))
 
 if __name__ == '__main__':
