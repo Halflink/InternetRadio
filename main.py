@@ -31,7 +31,8 @@ class Main:
                                                  dt_GPIO=jsonHandler.url_rotary_settings_dt_gpio,
                                                  switch_GPIO=jsonHandler.url_rotary_settings_switch_gpio,
                                                  min_counter=0, max_counter=len(self.url_list)-1,
-                                                 back_to_front=True, call_back=self.set_selector)
+                                                 back_to_front=True, call_back=self.run_selector,
+                                                 call_back_switch=self.set_select)
 
     def get_station_name(self, no):
         if no < 0:
@@ -65,6 +66,10 @@ class Main:
             elif self.is_state_select():
                 self.lcdMessageHandler.display_selector(self.get_station_name(self.playListRotary.counter),
                                                         self.get_station_name(self.playListRotary.counter + 1))
+    def run_selector(self):
+        self.set_state_select()
+        self.timer.start()
+        print(self.playListRotary.counter)
 
     def set_lcd(self):
         self.lcdMessageHandler.clock()
@@ -80,10 +85,8 @@ class Main:
     def set_state_select(self):
         self.state = self.state_select
 
-    def set_selector(self):
-        self.set_state_select()
-        self.timer.start()
-        print(self.playListRotary.counter)
+    def set_select(self, counter):
+        print('Counter {}'.format(counter))
 
 
 if __name__ == '__main__':

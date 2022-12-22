@@ -51,8 +51,11 @@ class RotaryEncoder:
         self.last_state = state
 
     def check_switch_state(self, channel):
-        switch_state = self.GPIO.input(self.switch) == 1
-        print(switch_state)
+        state = self.GPIO.input(self.switch)
+        if state == 1:
+            selected = self.counter
+            self.call_back_switch(selected)
+        print(state)
         self.sleep(0.05)
-        self.call_back_switch(switch_state)
+
 
