@@ -20,6 +20,9 @@ class Main:
         self.url_list = jsonHandler.url_list
         self.current_url = 0
         self.set_station(self.current_url)
+        self.state_play = 'PLAY'
+        self.state_select = 'SELECT'
+        self.state = self.state_play
         self.set_lcd()
 
         self.playListRotary = self.RotaryEncoder(clk_GPIO=jsonHandler.url_rotary_settings_clk_gpio,
@@ -27,6 +30,18 @@ class Main:
                                                  switch_GPIO=jsonHandler.url_rotary_settings_switch_gpio,
                                                  min_counter=0, max_counter=len(self.url_list)-1,
                                                  back_to_front=True, call_back=self.test)
+
+    def is_state_play(self):
+        if self.state == self.state_play:
+            return True
+        else:
+            return False
+
+    def is_state_select(self):
+        if self.state == self.state_select:
+            return True
+        else:
+            return False
 
     def set_lcd(self):
         self.lcdMessageHandler.clock()
@@ -36,12 +51,22 @@ class Main:
         self.current_url = station_no
         self.lcdMessageHandler.set_current_message(self.url_list[self.current_url]['station'])
 
+    def set_state_play(self):
+        self.state = self.state_play
+
+    def set_state_select(self):
+        self.state = self.state_select
+
     def test(self):
+        self.set_state_select()
         print(self.playListRotary.counter)
 
 
 if __name__ == '__main__':
     main = Main()
     while True:
-        main.sleep(1)
-        main.set_lcd()
+        main.sleep(0.1)
+        if main.is_state_play():
+            main.set_lcd()
+        elif main.is_state_select():
+            main.lcdMessageHandler.display_selector('testline1', 'testline2')
