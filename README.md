@@ -32,6 +32,13 @@ a Pi Zero 2 instead
   * Set up WIFI
   * Install GIT `sudo apt-get install git`
 * HIFIBerry  
+  * Enable I2C bus (in Raspberry config)
+  * Note the address HIFIBerry uses
+  * sudo pip install VNC
+* LCD screen
+  * Enable I2C bus
+  * Note the address the screen uses (make sure its different from the address HiFi Berry uses)
+
 
 ## PARTS LIST*
 * 1x Raspberry Pi 3 Model B
