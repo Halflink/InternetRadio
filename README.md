@@ -41,7 +41,7 @@ a Pi Zero 2 instead
 
 
 ## PARTS LIST*
-* 1x Raspberry Pi 3 Model B
+* 1x ~~Raspberry Pi 3 Model B~~ Raspberry Pi Zero 2 W
 * 2x [rotary encoder](https://www.bitsandparts.nl/Rotary-Encoder-Pulsgever-EC11-20mm-p1911600)
 * 6x 10K resistors
 * 1x [LCD display with I2C interface](https://www.bitsandparts.nl/Display-LCD-HD44780-16x2-wit-op-blauw-met-I2C-interface-p1067338)
