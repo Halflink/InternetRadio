@@ -55,3 +55,5 @@ a Pi Zero 2 instead
 
 ### 3D printing rotary button
 ![Rotary buttons](/docs/rotaryholder.jpg)
+### test print front
+![No alternative](/docs/testprintfront.jpg)
