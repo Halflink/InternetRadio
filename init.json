@@ -36,8 +36,8 @@
 		"switch gpio": 17
 	},
 	"volume rotary settings": {
-		"clk gpio": 6,
-		"dt gpio": 13,
+		"clk gpio": 13,
+		"dt gpio": 6,
 		"switch gpio": 5
 	}
 }
