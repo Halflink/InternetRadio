@@ -31,14 +31,14 @@
 		}
 	],
 	"url rotary settings": {
+		"clk gpio": 22,
+		"dt gpio": 27,
+		"switch gpio": 17
+	},
+	"volume rotary settings": {
 		"clk gpio": 6,
 		"dt gpio": 13,
 		"switch gpio": 5
-	},
-	"volume rotary settings": {
-		"clk gpio": 27,
-		"dt gpio": 22,
-		"switch gpio": 17
 	}
 }
 
